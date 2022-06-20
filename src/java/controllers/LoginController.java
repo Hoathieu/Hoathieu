@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import DAO.AccountImpl;
+import DAO.AccountDAO;
 import entities.TblAccount;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "")
 public class LoginController {
-    AccountImpl dao;
+    AccountDAO dao;
 
     public LoginController() {
-        dao = new AccountImpl();
+        dao = new AccountDAO();
     }
     
     @RequestMapping(value = "login",method = RequestMethod.GET)

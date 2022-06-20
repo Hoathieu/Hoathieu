@@ -14,11 +14,11 @@ import org.hibernate.Session;
  *
  * @author nhine
  */
-public class AccountImpl implements Generate<TblAccount, Integer>{
+public class AccountDAO implements Generate<TblAccount, Integer>{
 
     Session session;
 
-    public AccountImpl() {
+    public AccountDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
     @Override

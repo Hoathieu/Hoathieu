@@ -11,15 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/Admin/jsp/dist/css/login.css">
-        <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="../ShopAdmin/jsp/dist/css/login.css">
+        <title>Đăng nhập</title>
     </head>
     <body class="align">
-
         <div class="grid">
-
             <f:form method="post" action="processedLogin.htm" class="form login" commandName="account" >
-
                 <div class="form__field">
                     <label for="login__username"><svg class="icon">
                         <use xlink:href="#icon-user"></use>
