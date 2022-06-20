@@ -16,10 +16,18 @@
         <property name="portNumber" value="1433"/>
         <property name="databaseName" value="Floda"/>
         <property name="User" value="sa"/>
+<<<<<<< HEAD
         <property name="Password" value="1234$"/>
         <property name="URL" value="jdbc:sqlserver://localhost:1433;databaseName=Floda"/>
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="floda" object-type="user" pool-name="microsoft_sql_Floda_saPool"/>
     <jdbc-resource enabled="true" jndi-name="Admin" object-type="user" pool-name="microsoft_sql_Floda_saPool"/>
+=======
+        <property name="Password" value="123456$"/>
+        <property name="URL" value="jdbc:sqlserver://localhost:1433;databaseName=Floda"/>
+        <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+    </jdbc-connection-pool>
+    <jdbc-resource enabled="true" jndi-name="Shop" object-type="user" pool-name="microsoft_sql_Floda_saPool"/>
+>>>>>>> 401704beb578e1d5441eef1e4369998d968919ec
 </resources>

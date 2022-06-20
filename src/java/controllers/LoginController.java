@@ -43,7 +43,7 @@ public class LoginController {
             String name = account.getAccLogin();
             if (dao.login(name,account.getAccPassword())) {
                 model.addAttribute("account", account);
-                
+
                 return "home";
             }
             return "login";

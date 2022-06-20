@@ -6,8 +6,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,12 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,10 +35,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TblAccount.findByAccId", query = "SELECT t FROM TblAccount t WHERE t.accId = :accId"),
     @NamedQuery(name = "TblAccount.findByAccLogin", query = "SELECT t FROM TblAccount t WHERE t.accLogin = :accLogin"),
     @NamedQuery(name = "TblAccount.findByAccPassword", query = "SELECT t FROM TblAccount t WHERE t.accPassword = :accPassword"),
-    @NamedQuery(name = "TblAccount.findByPermissionLevel", query = "SELECT t FROM TblAccount t WHERE t.permissionLevel = :permissionLevel"),
     @NamedQuery(name = "TblAccount.findByCreateDate", query = "SELECT t FROM TblAccount t WHERE t.createDate = :createDate"),
     @NamedQuery(name = "TblAccount.findByStatus", query = "SELECT t FROM TblAccount t WHERE t.status = :status")})
 public class TblAccount implements Serializable {
+    @OneToMany(mappedBy = "accId")
+    private Collection<TblCart> tblCartCollection;
+    @OneToMany(mappedBy = "accId")
+    private Collection<TblUser> tblUserCollection;
+    @OneToMany(mappedBy = "accId")
+    private Collection<TblBlogComment> tblBlogCommentCollection;
+    @OneToMany(mappedBy = "accId")
+    private Collection<TblWishlist> tblWishlistCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +57,6 @@ public class TblAccount implements Serializable {
     @Size(max = 50)
     @Column(name = "accPassword")
     private String accPassword;
-    @Column(name = "permissionLevel")
-    private Integer permissionLevel;
     @Column(name = "createDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
@@ -86,14 +92,6 @@ public class TblAccount implements Serializable {
 
     public void setAccPassword(String accPassword) {
         this.accPassword = accPassword;
-    }
-
-    public Integer getPermissionLevel() {
-        return permissionLevel;
-    }
-
-    public void setPermissionLevel(Integer permissionLevel) {
-        this.permissionLevel = permissionLevel;
     }
 
     public Date getCreateDate() {
@@ -135,6 +133,42 @@ public class TblAccount implements Serializable {
     @Override
     public String toString() {
         return "entities.TblAccount[ accId=" + accId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TblCart> getTblCartCollection() {
+        return tblCartCollection;
+    }
+
+    public void setTblCartCollection(Collection<TblCart> tblCartCollection) {
+        this.tblCartCollection = tblCartCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblUser> getTblUserCollection() {
+        return tblUserCollection;
+    }
+
+    public void setTblUserCollection(Collection<TblUser> tblUserCollection) {
+        this.tblUserCollection = tblUserCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblBlogComment> getTblBlogCommentCollection() {
+        return tblBlogCommentCollection;
+    }
+
+    public void setTblBlogCommentCollection(Collection<TblBlogComment> tblBlogCommentCollection) {
+        this.tblBlogCommentCollection = tblBlogCommentCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblWishlist> getTblWishlistCollection() {
+        return tblWishlistCollection;
+    }
+
+    public void setTblWishlistCollection(Collection<TblWishlist> tblWishlistCollection) {
+        this.tblWishlistCollection = tblWishlistCollection;
     }
     
 }
