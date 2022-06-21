@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TblWishlist.findByWishId", query = "SELECT t FROM TblWishlist t WHERE t.wishId = :wishId"),
     @NamedQuery(name = "TblWishlist.findByStatus", query = "SELECT t FROM TblWishlist t WHERE t.status = :status")})
 public class TblWishlist implements Serializable {
+    @OneToMany(mappedBy = "wishId")
+    private Collection<TblWishlistDetal> tblWishlistDetalCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -96,6 +101,15 @@ public class TblWishlist implements Serializable {
     @Override
     public String toString() {
         return "entities.TblWishlist[ wishId=" + wishId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TblWishlistDetal> getTblWishlistDetalCollection() {
+        return tblWishlistDetalCollection;
+    }
+
+    public void setTblWishlistDetalCollection(Collection<TblWishlistDetal> tblWishlistDetalCollection) {
+        this.tblWishlistDetalCollection = tblWishlistDetalCollection;
     }
     
 }

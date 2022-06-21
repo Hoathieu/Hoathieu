@@ -6,16 +6,19 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TblSize.findBySizeName", query = "SELECT t FROM TblSize t WHERE t.sizeName = :sizeName"),
     @NamedQuery(name = "TblSize.findByStatus", query = "SELECT t FROM TblSize t WHERE t.status = :status")})
 public class TblSize implements Serializable {
+    @OneToMany(mappedBy = "sizeId")
+    private Collection<TblProductDetail> tblProductDetailCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -103,6 +108,15 @@ public class TblSize implements Serializable {
     @Override
     public String toString() {
         return "entities.TblSize[ sizeId=" + sizeId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TblProductDetail> getTblProductDetailCollection() {
+        return tblProductDetailCollection;
+    }
+
+    public void setTblProductDetailCollection(Collection<TblProductDetail> tblProductDetailCollection) {
+        this.tblProductDetailCollection = tblProductDetailCollection;
     }
     
 }

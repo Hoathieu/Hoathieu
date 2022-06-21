@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TblCart.findByTotalCash", query = "SELECT t FROM TblCart t WHERE t.totalCash = :totalCash"),
     @NamedQuery(name = "TblCart.findByStatus", query = "SELECT t FROM TblCart t WHERE t.status = :status")})
 public class TblCart implements Serializable {
+    @OneToMany(mappedBy = "cartId")
+    private Collection<TblCartDetail> tblCartDetailCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -121,6 +123,15 @@ public class TblCart implements Serializable {
     @Override
     public String toString() {
         return "entities.TblCart[ cartId=" + cartId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TblCartDetail> getTblCartDetailCollection() {
+        return tblCartDetailCollection;
+    }
+
+    public void setTblCartDetailCollection(Collection<TblCartDetail> tblCartDetailCollection) {
+        this.tblCartDetailCollection = tblCartDetailCollection;
     }
     
 }
