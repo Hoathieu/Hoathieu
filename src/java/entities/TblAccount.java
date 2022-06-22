@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TblAccount.findByStatus", query = "SELECT t FROM TblAccount t WHERE t.status = :status")})
 public class TblAccount implements Serializable {
     @OneToMany(mappedBy = "accId")
+    private Collection<TblCommentProduct> tblCommentProductCollection;
+    @OneToMany(mappedBy = "accId")
+    private Collection<TblRating> tblRatingCollection;
+    @OneToMany(mappedBy = "accId")
     private Collection<TblCart> tblCartCollection;
     @OneToMany(mappedBy = "accId")
     private Collection<TblUser> tblUserCollection;
@@ -169,6 +173,24 @@ public class TblAccount implements Serializable {
 
     public void setTblWishlistCollection(Collection<TblWishlist> tblWishlistCollection) {
         this.tblWishlistCollection = tblWishlistCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblCommentProduct> getTblCommentProductCollection() {
+        return tblCommentProductCollection;
+    }
+
+    public void setTblCommentProductCollection(Collection<TblCommentProduct> tblCommentProductCollection) {
+        this.tblCommentProductCollection = tblCommentProductCollection;
+    }
+
+    @XmlTransient
+    public Collection<TblRating> getTblRatingCollection() {
+        return tblRatingCollection;
+    }
+
+    public void setTblRatingCollection(Collection<TblRating> tblRatingCollection) {
+        this.tblRatingCollection = tblRatingCollection;
     }
     
 }
